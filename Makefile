@@ -1,12 +1,12 @@
 #
-# OMNeT++/OMNEST Makefile for TCAMSimulation
+# OMNeT++/OMNEST Makefile for simulation
 #
 # This file was generated with the command:
-#  opp_makemake -f
+#  opp_makemake -f --deep -O out
 #
 
 # Name of target to be created (-o option)
-TARGET = TCAMSimulation$(EXE_SUFFIX)
+TARGET = simulation$(EXE_SUFFIX)
 
 # User interface (uncomment one) (-u option)
 USERIF_LIBS = $(ALL_ENV_LIBS) # that is, $(TKENV_LIBS) $(CMDENV_LIBS)
@@ -104,7 +104,7 @@ msgheaders: $(MSGFILES:.msg=_m.h)
 clean:
 	$(qecho) Cleaning...
 	$(Q)-rm -rf $O
-	$(Q)-rm -f TCAMSimulation TCAMSimulation.exe libTCAMSimulation.so libTCAMSimulation.a libTCAMSimulation.dll libTCAMSimulation.dylib
+	$(Q)-rm -f simulation simulation.exe libsimulation.so libsimulation.a libsimulation.dll libsimulation.dylib
 	$(Q)-rm -f ./*_m.cc ./*_m.h
 
 cleanall: clean
@@ -116,29 +116,30 @@ depend:
 
 # DO NOT DELETE THIS LINE -- make depend depends on it.
 $O/AVLTree.o: AVLTree.cc \
-  ./AVLTree.h \
-  ./IPAddress.h
+	AVLTree.h \
+	IPAddress.h
 $O/ExtMessage_m.o: ExtMessage_m.cc \
-  ./ExtMessage_m.h \
-  ./IPAddress.h
+	ExtMessage_m.h \
+	IPAddress.h
 $O/IPAddress.o: IPAddress.cc \
-  ./IPAddress.h \
-  ./Headers.h \
-  ./AVLTree.h \
-  ./Router.h \
-  ./ExtMessage_m.h \
-  ./PC.h
+	AVLTree.h \
+	ExtMessage_m.h \
+	Headers.h \
+	IPAddress.h \
+	PC.h \
+	Router.h
 $O/PC.o: PC.cc \
-  ./Router.h \
-  ./ExtMessage_m.h \
-  ./PC.h \
-  ./IPAddress.h \
-  ./Headers.h \
-  ./AVLTree.h
+	AVLTree.h \
+	ExtMessage_m.h \
+	Headers.h \
+	IPAddress.h \
+	PC.h \
+	Router.h
 $O/Router.o: Router.cc \
-  ./Headers.h \
-  ./IPAddress.h \
-  ./AVLTree.h \
-  ./ExtMessage_m.h \
-  ./Router.h \
-  ./PC.h
+	AVLTree.h \
+	ExtMessage_m.h \
+	Headers.h \
+	IPAddress.h \
+	PC.h \
+	Router.h
+
