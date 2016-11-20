@@ -185,6 +185,10 @@ void Router::finish()
     EV << "Queue count, max:    " << queueCountStats.getMax() << endl;
     EV << "Queue count, mean:   " << queueCountStats.getMean() << endl;
     EV << "Queue count, stddev: " << queueCountStats.getStddev() << endl;
+    EV << "Msg response, min:    " << msgResponseTimeVector.getMin() << endl;
+    EV << "Msg response, max:    " << msgResponseTimeVector.getMax() << endl;
+    EV << "Msg response, mean:   " << msgResponseTimeVector.getMean() << endl;
+    EV << "Msg response, stddev: " << msgResponseTimeVector.getStddev() << endl;
 
     queueCountStats.recordAs("queue count");
     msgResponseTimeVector.recordAs("hanling msg time");
