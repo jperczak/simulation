@@ -49,7 +49,8 @@ Router::Router()
 Router::~Router()
 {
     cancelAndDelete(selfmsg);
-    cancelAndDelete(ttmsg);
+    if (ttmsg)
+        delete ttmsg;
 }
 
 void Router::initialize()
@@ -58,7 +59,8 @@ void Router::initialize()
 
     queueCountStats.setName("queueCountStats");
     //queueCountStats.setRangeAutoUpper(0, 10, 1.5);
-    queueCountVector.setName("QueueCounter");
+    queueCountVector.setName("queueCounter");
+    msgResponseTimeVector.setName("response time");
 
     std::string a = par("address0");
     const char * a1 = a.c_str();
@@ -137,6 +139,7 @@ void Router::handleMessage(cMessage *msg)
         if(ttmsg != nullptr)
         {
             IPAddress dst = ttmsg->getDstAddress();
+            simtime_t handlingTime = simTime() - ttmsg->getArrivalTime();
 
             node* n = avlTree.FindProperNode(dst);
             int p = atoi((n->gate).c_str());
@@ -149,6 +152,7 @@ void Router::handleMessage(cMessage *msg)
             {
                 queueCountVector.record(queue.getLength());
                 queueCountStats.collect(queue.getLength());
+                msgResponseTimeVector.collect(handlingTime);
             }
         }
         cancelEvent(selfmsg);
@@ -183,5 +187,6 @@ void Router::finish()
     EV << "Queue count, stddev: " << queueCountStats.getStddev() << endl;
 
     queueCountStats.recordAs("queue count");
+    msgResponseTimeVector.recordAs("hanling msg time");
 }
 //interfejs funkcji porównujacej adres (dlugosc maski) wzbogacic o mozliwosc porownywania adresow np. od x do y bitu adresu.

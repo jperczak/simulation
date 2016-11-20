@@ -45,4 +45,5 @@ private:
     //statistic:
     cLongHistogram queueCountStats;
     cOutVector queueCountVector;
+    cStdDev  msgResponseTimeVector;
 };
