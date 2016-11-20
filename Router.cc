@@ -143,7 +143,7 @@ void Router::handleMessage(cMessage *msg)
         if(!queue.isEmpty())
         {
             ttmsg = check_and_cast<ExtMessage *>(queue.pop());
-            scheduleAt(simTime()+intrand(5)+1, selfmsg);
+            scheduleAt(simTime()+0.00015, selfmsg);
         }
     }
     else
@@ -152,7 +152,7 @@ void Router::handleMessage(cMessage *msg)
         if(queue.isEmpty() && !selfmsg->isScheduled())
         {
             ttmsg = arrmsg;
-            scheduleAt(simTime()+intrand(5)+1, selfmsg);
+            scheduleAt(simTime()+0.00015, selfmsg);
         }
         else
         {
@@ -160,5 +160,16 @@ void Router::handleMessage(cMessage *msg)
         }
         arrmsg = nullptr;
      }
+}
+
+void Router::finish()
+{
+    // This function is called by OMNeT++ at the end of the simulation.
+    EV << "Queue count, min:    " << queueCountStats.getMin() << endl;
+    EV << "Queue count, max:    " << queueCountStats.getMax() << endl;
+    EV << "Queue count, mean:   " << queueCountStats.getMean() << endl;
+    EV << "Queue count, stddev: " << queueCountStats.getStddev() << endl;
+
+    queueCountStats.recordAs("queue count");
 }
 //interfejs funkcji porównujacej adres (dlugosc maski) wzbogacic o mozliwosc porownywania adresow np. od x do y bitu adresu.

@@ -31,6 +31,7 @@ public:
 protected:
     virtual void initialize();
     virtual void handleMessage(cMessage *msg);
+    virtual void finish();
 
 private:
     IPAddress ipAddress0;
@@ -40,4 +41,8 @@ private:
     cQueue queue;
     cMessage *selfmsg; // pointer to the event object which we'll use for timing
     ExtMessage *ttmsg; // actual msg to send after selfmsg event
+
+    //statistic:
+    cLongHistogram queueCountStats;
+    cOutVector queueCountVector;
 };
