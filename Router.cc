@@ -56,6 +56,10 @@ void Router::initialize()
 {
     selfmsg = new cMessage("event");
 
+    queueCountStats.setName("queueCountStats");
+    //queueCountStats.setRangeAutoUpper(0, 10, 1.5);
+    queueCountVector.setName("QueueCounter");
+
     std::string a = par("address0");
     const char * a1 = a.c_str();
     ipAddress0.set(a1); WATCH(ipAddress0);
@@ -138,6 +142,14 @@ void Router::handleMessage(cMessage *msg)
             int p = atoi((n->gate).c_str());
 
             send(ttmsg, "port$o", p);
+
+            std::string name = getName();
+            const char * routerName = name.c_str();
+            if(strcmp(routerName,"Router1")==0)
+            {
+                queueCountVector.record(queue.getLength());
+                queueCountStats.collect(queue.getLength());
+            }
         }
         cancelEvent(selfmsg);
         if(!queue.isEmpty())
