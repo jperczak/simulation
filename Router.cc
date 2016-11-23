@@ -193,4 +193,3 @@ void Router::finish()
     queueCountStats.recordAs("queue count");
     msgResponseTimeVector.recordAs("hanling msg time");
 }
-//interfejs funkcji porównujacej adres (dlugosc maski) wzbogacic o mozliwosc porownywania adresow np. od x do y bitu adresu.

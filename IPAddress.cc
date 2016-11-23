@@ -290,3 +290,21 @@ IPAddress IPAddress::makeBroadcastAddress(IPAddress netmask) const
     return br;
 }
 
+bool IPAddress::compareNetworkPart(const IPAddress& to_cmp, int mask, int firstBit /* = 0 */) const
+{
+    uint32 addr2 = to_cmp.getInt();
+    uint32 res = addr ^ addr2;
+
+    int endBit = 32 - mask;
+    int k = 31 - firstBit;
+    for (int i = k; i>=endBit; i--)
+    {
+        if (res & (1 << i))
+        {
+            // 1, means not equal, so stop
+            return false;
+        }
+    }
+
+    return true;
+}

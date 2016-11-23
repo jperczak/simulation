@@ -29,6 +29,8 @@ public:
     IPAddress() { addr = 0; }
     ~IPAddress() {}
 
+    bool compareNetworkPart(const IPAddress& to_cmp, int mask, int firstBit = 0) const;
+
 protected:
     // Address is encoded in a single uint32
     uint32 addr;
@@ -40,7 +42,6 @@ protected:
     static void _checkNetmaskLength(int length);
     // Returns a netmask with the given length (Implementation note: MSVC refuses to shift by 32 bits!)
     static uint32 _makeNetmask(int length) { return length >= 32 ? 0xffffffffu : ~(0xffffffffu >> length); }
-
 
  public:
      /**

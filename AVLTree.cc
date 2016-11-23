@@ -112,10 +112,9 @@ node* AVLTree::remove(node* p, IPAddress k) // deleting k key from p tree
 
 node* AVLTree::search(IPAddress data, node *p)
 {
-    //TODO add to searching MASK value
     if(p != nullptr)
     {
-        if(data == p->key)
+        if(data.compareNetworkPart(p->key, p->mask))
         {
             return p;
         }
