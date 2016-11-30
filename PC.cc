@@ -44,9 +44,6 @@ void PC::initialize()
     event = new cMessage("event");
 
     scheduleAt(simTime()+(poisson(10)*0.0001), event);
-    //sprawdziæ ile TCAM jest w stanie wykonaæ operacji na sekunde i stad pozyskac przyblizony czas 1 operacji.
-    //zliczac selfmsg - d³ugoœæ kolejki pakietów do obs³ugi
-    //próba wlaczenia symulacji z lini polecen ale z IDE konczy sie na: Plugin path: ./plugins i nic dalej...
 }
 
 ExtMessage *PC::generateNewPacket()
