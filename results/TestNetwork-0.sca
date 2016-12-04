@@ -1,0 +1,107 @@
+version 2
+run TestNetwork-0-20161204-18:46:16-10900
+attr configname TestNetwork
+attr datetime 20161204-18:46:16
+attr experiment TestNetwork
+attr inifile omnetpp.ini
+attr iterationvars ""
+attr iterationvars2 $repetition=0
+attr measurement ""
+attr network TestNetwork
+attr processid 10900
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+
+statistic TestNetwork.Router0 	"queue count"
+field count 0
+field mean nan
+field stddev nan
+field sum 0
+field sqrsum 0
+field min nan
+field max nan
+attr type  int
+bin	-INF	0
+bin	-1	0
+bin	0	0
+bin	1	0
+statistic TestNetwork.Router0 	"hanling msg time"
+field count 0
+field mean nan
+field stddev nan
+field sum 0
+field sqrsum 0
+field min nan
+field max nan
+statistic TestNetwork.Router1 	"queue count"
+field count 5
+field mean 2
+field stddev 1.5811388300842
+field sum 10
+field sqrsum 30
+field min 0
+field max 4
+attr type  int
+bin	-INF	0
+bin	-2	0
+bin	-1	0
+bin	0	1
+bin	1	1
+bin	2	1
+bin	3	1
+bin	4	1
+bin	5	0
+bin	6	0
+statistic TestNetwork.Router1 	"hanling msg time"
+field count 5
+field mean 0.00964
+field stddev 0.0031145625696075
+field sum 0.0482
+field sqrsum 0.00050345
+field min 0.00745
+field max 0.015
+statistic TestNetwork.Router2 	"queue count"
+field count 0
+field mean nan
+field stddev nan
+field sum 0
+field sqrsum 0
+field min nan
+field max nan
+attr type  int
+bin	-INF	0
+bin	-1	0
+bin	0	0
+bin	1	0
+statistic TestNetwork.Router2 	"hanling msg time"
+field count 0
+field mean nan
+field stddev nan
+field sum 0
+field sqrsum 0
+field min nan
+field max nan
+statistic TestNetwork.Router3 	"queue count"
+field count 0
+field mean nan
+field stddev nan
+field sum 0
+field sqrsum 0
+field min nan
+field max nan
+attr type  int
+bin	-INF	0
+bin	-1	0
+bin	0	0
+bin	1	0
+statistic TestNetwork.Router3 	"hanling msg time"
+field count 0
+field mean nan
+field stddev nan
+field sum 0
+field sqrsum 0
+field min nan
+field max nan

@@ -168,7 +168,7 @@ void Router::handleMessage(cMessage *msg)
         if(queue.isEmpty() && !selfmsg->isScheduled())
         {
             ttmsg = arrmsg;
-            scheduleAt(simTime()+0.00015, selfmsg);
+            scheduleAt(simTime()+0.015, selfmsg);
         }
         else
         {

@@ -15,6 +15,9 @@
 
 #include <Headers.h>
 
+static long maxSimPacketStatic = 0;
+static long packetCounter = 0;
+
 class PC  : public cSimpleModule
 {
 public:

@@ -37,13 +37,22 @@ PC::~PC()
 
 void PC::initialize()
 {
+    std::string maxPacket = par("MAX_SIM_PACKET");
+    const char * mp = maxPacket.c_str();
+    long maxSimPacket = atoi(mp);
+    if(maxSimPacketStatic==0)
+    {
+        maxSimPacketStatic = maxSimPacket;
+        WATCH(maxSimPacketStatic);
+    }
+
     std::string a = par("address");
     const char * c = a.c_str();
 	ipAddress.set(c); WATCH(ipAddress);
 	
     event = new cMessage("event");
 
-    scheduleAt(simTime()+(poisson(10)*0.0001), event);
+    scheduleAt(simTime()+(poisson(10)*0.001), event);
 }
 
 ExtMessage *PC::generateNewPacket()
@@ -80,14 +89,19 @@ void PC::handleMessage(cMessage *msg)
 {
     if (msg->isSelfMessage())
     {
+        if( packetCounter >= maxSimPacketStatic )
+        {
+            endSimulation();
+        }
         message = generateNewPacket();
+        packetCounter++;
 
         EV << "Sending: " << message->getName() << "\n";
 
         send(message, "port$o");
         message = nullptr;
 
-        scheduleAt(simTime()+(poisson(10)*0.0001), event);
+        scheduleAt(simTime()+(poisson(10)*0.001), event);
     }
     else
     {

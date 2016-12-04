@@ -30,6 +30,7 @@ simple PC
     parameters:
         @display("i=device/laptop;is=n");
         string address = default("");
+        volatile string MAX_SIM_PACKET = default("1000000");
     gates:
         inout port;
 }

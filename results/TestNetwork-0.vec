@@ -1,0 +1,23 @@
+version 2
+run TestNetwork-0-20161204-18:46:16-10900
+attr configname TestNetwork
+attr datetime 20161204-18:46:16
+attr experiment TestNetwork
+attr inifile omnetpp.ini
+attr iterationvars ""
+attr iterationvars2 $repetition=0
+attr measurement ""
+attr network TestNetwork
+attr processid 10900
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+
+vector 1  TestNetwork.Router1  queueCounter  ETV
+1	27	0.037	4
+1	29	0.03715	3
+1	31	0.0373	2
+1	33	0.03745	1
+1	35	0.0376	0
