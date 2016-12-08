@@ -41,6 +41,7 @@ private:
     cQueue queue;
     cMessage *selfmsg; // pointer to the event object which we'll use for timing
     ExtMessage *ttmsg; // actual msg to send after selfmsg event
+    const char* simulationMode;
 
     //statistic:
     cLongHistogram queueCountStats;

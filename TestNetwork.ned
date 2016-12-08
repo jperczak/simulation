@@ -21,6 +21,7 @@ simple Router
         string address0 = default("");
         string address1 = default("");
         string address2 = default("");
+        volatile string SIM_MODE = default("TCAM");
     gates:
         inout port[];
 }

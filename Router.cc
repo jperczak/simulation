@@ -62,6 +62,8 @@ void Router::initialize()
     queueCountVector.setName("queueCounter");
     msgResponseTimeVector.setName("response time");
 
+    simulationMode = par("SIM_MODE");
+
     std::string a = par("address0");
     const char * a1 = a.c_str();
     ipAddress0.set(a1); WATCH(ipAddress0);
@@ -159,7 +161,15 @@ void Router::handleMessage(cMessage *msg)
         if(!queue.isEmpty())
         {
             ttmsg = check_and_cast<ExtMessage *>(queue.pop());
-            scheduleAt(simTime()+0.00015, selfmsg);
+            if(strcmp(simulationMode,"TCAM")==0)
+            {
+                scheduleAt(simTime()+2.2e-009, selfmsg);
+            }
+            else
+            {
+                double nTime = normal(37.44e-009,20.26e-009);
+                scheduleAt(simTime()+nTime, selfmsg);
+            }
         }
     }
     else
@@ -168,7 +178,15 @@ void Router::handleMessage(cMessage *msg)
         if(queue.isEmpty() && !selfmsg->isScheduled())
         {
             ttmsg = arrmsg;
-            scheduleAt(simTime()+0.015, selfmsg);
+            if(strcmp(simulationMode,"TCAM")==0)
+            {
+                scheduleAt(simTime()+2.2e-009, selfmsg);
+            }
+            else
+            {
+                double nTime = normal(37.44e-009,20.26e-009);
+                scheduleAt(simTime()+nTime, selfmsg);
+            }
         }
         else
         {

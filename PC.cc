@@ -52,7 +52,7 @@ void PC::initialize()
 	
     event = new cMessage("event");
 
-    scheduleAt(simTime()+(poisson(10)*0.001), event);
+    scheduleAt(simTime()+(poisson(15)*1e-009), event);
 }
 
 ExtMessage *PC::generateNewPacket()
@@ -101,7 +101,7 @@ void PC::handleMessage(cMessage *msg)
         send(message, "port$o");
         message = nullptr;
 
-        scheduleAt(simTime()+(poisson(10)*0.001), event);
+        scheduleAt(simTime()+(poisson(15)*1e-009), event);
     }
     else
     {
