@@ -34,6 +34,9 @@ protected:
     virtual void finish();
 
 private:
+    double GetDelayForTCAM();
+    double GetDelayForRAM();
+
     IPAddress ipAddress0;
     IPAddress ipAddress1;
     IPAddress ipAddress2;

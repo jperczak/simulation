@@ -31,6 +31,7 @@ protected:
     virtual void handleMessage(cMessage *msg);
 
 private:
+    double GetPoissonDelay();
     ExtMessage* generateNewPacket();
     std::string generateDstAdr();
 

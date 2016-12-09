@@ -48,6 +48,7 @@ Router::Router()
 
 Router::~Router()
 {
+    queue.clear();
     cancelAndDelete(selfmsg);
     if (ttmsg)
         delete ttmsg;
@@ -141,7 +142,8 @@ void Router::handleMessage(cMessage *msg)
         if(ttmsg != nullptr)
         {
             IPAddress dst = ttmsg->getDstAddress();
-            simtime_t handlingTime = simTime() - ttmsg->getArrivalTime();
+            simtime_t simtime = simTime();
+            simtime_t handlingTime = simtime - ttmsg->getTimestamp();
 
             node* n = avlTree.FindProperNode(dst);
             int p = atoi((n->gate).c_str());
@@ -163,11 +165,11 @@ void Router::handleMessage(cMessage *msg)
             ttmsg = check_and_cast<ExtMessage *>(queue.pop());
             if(strcmp(simulationMode,"TCAM")==0)
             {
-                scheduleAt(simTime()+2.2e-009, selfmsg);
+                scheduleAt(simTime()+GetDelayForTCAM(), selfmsg);
             }
             else
             {
-                double nTime = normal(37.44e-009,20.26e-009);
+                double nTime = GetDelayForRAM();
                 scheduleAt(simTime()+nTime, selfmsg);
             }
         }
@@ -175,16 +177,17 @@ void Router::handleMessage(cMessage *msg)
     else
     {
         ExtMessage *arrmsg = check_and_cast<ExtMessage *>(msg);
+        arrmsg->setTimestamp();
         if(queue.isEmpty() && !selfmsg->isScheduled())
         {
             ttmsg = arrmsg;
             if(strcmp(simulationMode,"TCAM")==0)
             {
-                scheduleAt(simTime()+2.2e-009, selfmsg);
+                scheduleAt(simTime()+GetDelayForTCAM(), selfmsg);
             }
             else
             {
-                double nTime = normal(37.44e-009,20.26e-009);
+                double nTime = GetDelayForRAM();
                 scheduleAt(simTime()+nTime, selfmsg);
             }
         }
@@ -196,6 +199,18 @@ void Router::handleMessage(cMessage *msg)
      }
 }
 
+double Router::GetDelayForTCAM()
+{
+    return 2.2e-009;
+}
+
+double Router::GetDelayForRAM()
+{
+    int irand = intrand(2)+1;
+    double dTime = 4.7e-009 * irand;
+    return dTime;
+}
+
 void Router::finish()
 {
     // This function is called by OMNeT++ at the end of the simulation.
@@ -203,6 +218,7 @@ void Router::finish()
     EV << "Queue count, max:    " << queueCountStats.getMax() << endl;
     EV << "Queue count, mean:   " << queueCountStats.getMean() << endl;
     EV << "Queue count, stddev: " << queueCountStats.getStddev() << endl;
+
     EV << "Msg response, min:    " << msgResponseTimeVector.getMin() << endl;
     EV << "Msg response, max:    " << msgResponseTimeVector.getMax() << endl;
     EV << "Msg response, mean:   " << msgResponseTimeVector.getMean() << endl;

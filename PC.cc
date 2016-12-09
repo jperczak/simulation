@@ -52,7 +52,7 @@ void PC::initialize()
 	
     event = new cMessage("event");
 
-    scheduleAt(simTime()+(poisson(15)*1e-009), event);
+    scheduleAt(simTime()+GetPoissonDelay(), event);
 }
 
 ExtMessage *PC::generateNewPacket()
@@ -101,7 +101,7 @@ void PC::handleMessage(cMessage *msg)
         send(message, "port$o");
         message = nullptr;
 
-        scheduleAt(simTime()+(poisson(15)*1e-009), event);
+        scheduleAt(simTime()+GetPoissonDelay(), event);
     }
     else
     {
@@ -112,4 +112,9 @@ void PC::handleMessage(cMessage *msg)
         cancelAndDelete(ttmsg);
         ttmsg=nullptr;
     }
+}
+
+double PC::GetPoissonDelay()
+{
+    return poisson(3)*10e-009;
 }
