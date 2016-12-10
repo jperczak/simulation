@@ -206,7 +206,7 @@ double Router::GetDelayForTCAM()
 
 double Router::GetDelayForRAM()
 {
-    int irand = intrand(2)+1;
+    int irand = intrand(6)+1;
     double dTime = 4.7e-009 * irand;
     return dTime;
 }

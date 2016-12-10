@@ -116,5 +116,5 @@ void PC::handleMessage(cMessage *msg)
 
 double PC::GetPoissonDelay()
 {
-    return poisson(3)*10e-009;
+    return poisson(5)*10e-009;
 }
